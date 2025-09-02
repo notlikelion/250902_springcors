@@ -15,6 +15,20 @@ async function fetchMemos() {
     }
 }
 // 메모를 추가하는 함수 (form)
+memoForm.addEventListener('submit',
+    async (event) => {
+    event.preventDefault();
+    const content = memoContent.value;
+    if (!content) return; // 더 이상 작동 x
+    // API 서버에 POST 요청
+    await fetch('/api/memos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: content })
+    });
+    memoContent.value = '';
+    await fetchMemos();
+})
 // 각각의 메모를 누르면 삭제되는 함수
 
 fetchMemos();
