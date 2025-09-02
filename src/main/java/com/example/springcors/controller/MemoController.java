@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping("/api/memos")
+@CrossOrigin
 public class MemoController {
 //    private final CopyOnWriteArrayList<Memo> memos = new CopyOnWriteArrayList<>();
     private final ConcurrentHashMap<Long, Memo> memos = new ConcurrentHashMap<>();
