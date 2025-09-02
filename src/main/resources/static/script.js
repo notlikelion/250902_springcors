@@ -11,6 +11,7 @@ async function fetchMemos() {
     for (const memo of memos) {
         const li = document.createElement('li');
         li.innerHTML = `<p>${memo.content}</p>`
+        li.addEventListener('click', () => deleteMemo(memo.id))
         memoList.appendChild(li);
     }
 }
@@ -30,5 +31,10 @@ memoForm.addEventListener('submit',
     await fetchMemos();
 })
 // 각각의 메모를 누르면 삭제되는 함수
+async function deleteMemo(id) {
+    await fetch(`/api/memos/${id}`, {
+    method: 'DELETE'});
+    await fetchMemos();
+}
 
-fetchMemos();
+document.addEventListener('DOMContentLoaded', fetchMemos)
